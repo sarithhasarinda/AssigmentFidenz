@@ -7,17 +7,17 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia'; 
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
-import clo from "./clo.jpg"
+import clo from "./cloud.png"
 import { Container } from 'react-bootstrap';
 import CloudQueueOutlinedIcon from '@mui/icons-material/CloudQueueOutlined';
 
 export const Weather = (props) => {
-  const {city,temp,date,desc,pressure,humidity,visibility,temp_min,temp_max,windspeed,degree,sunrise,sunset} = props;
+  const {city,temp,date,desc,pressure,humidity,visibility,temp_min,temp_max,windspeed,degree,sunrise,sunset,bgclr} = props;
   return (
 
 <div style={{marginTop:"50px",marginLeft:"20px"}}>
     <Card sx={{ maxWidth: 500 }}>
-      <CardMedia style={{backgroundColor:"#3822e7",height:"250px"}}
+      <CardMedia style={{backgroundColor:bgclr,height:"250px"}}
         sx={{ height: 200 }}
         image  ={clo}
         title="green iguana"
@@ -45,7 +45,7 @@ export const Weather = (props) => {
         </Container>
         </CardMedia>
 
-      <CardContent style={{color:"white" , backgroundColor:"#345b47",fontFamily:"inter"}}>
+      <CardContent style={{color:"white" , backgroundColor:"#2D2D2D",fontFamily:"inter"}}>
 <Row>
 
 <Col>

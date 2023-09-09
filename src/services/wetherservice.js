@@ -1,16 +1,17 @@
-import axios from 'axios';
+import axios from "axios";
+import { WEATHER_API_BASE_URL } from "../config/constant";
 
-const API_KEY = '256ba9bbcef8f699356a8c927147a738';
+const API_KEY =process.env.REACT_APP_API_KEY
 
 const WeatherService = {
   getWeatherByCityCode: async (cityCode) => {
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/group?id=${cityCode}&units=metric&appid=${API_KEY}`
+        `${WEATHER_API_BASE_URL}/group?id=${cityCode}&units=metric&appid=${API_KEY}`
       );
       return response.data;
     } catch (error) {
-      console.error('Error fetching weather data:', error);
+      console.error("Error fetching weather data:", error);
       throw error;
     }
   },

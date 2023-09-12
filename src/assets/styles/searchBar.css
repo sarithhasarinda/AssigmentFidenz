@@ -1,0 +1,28 @@
+/* styles.css */
+.search-container {
+    display: flex;
+    align-items: center;
+    font-family: inter;
+    
+  }
+  
+  .search-bar {
+    background-color: rgb(6, 1, 28);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    border-color: transparent;
+  }
+  
+  .search-button {
+    background-color: rgb(79, 0, 103);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  

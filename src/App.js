@@ -1,5 +1,5 @@
 import './App.css';
-import CityList from './components/CityList';
+import CityList from './pages/CityList';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap/dist/css/bootstrap.css';
 

@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import WeatherService from "../services/wetherservice";
 import cityData from "../data/cities.json";
-import { Weather } from "./Weather";
+import { Weather } from "../components/Weather";
 import "../assets/styles/MainWeather.css";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import Headerbg from "../assets/images/Headerbg.png";
 import { Col, Container, Row } from "react-bootstrap";
+import SearchBar from "../components/SearchBar";
 
 const CityList = () => {
   const [weatherData, setWeatherData] = useState([]);
+  const [fileteredData,setFilteredData] = useState([])
+  const [inputValue,setInputValue] = useState("")
   async function fetchWeatherData() {
     const cityCodes = cityData.List;
-    console.log(cityCodes);
     const dataPromises = cityCodes.map((cityArray) =>
       WeatherService.getWeatherByCityCode(cityArray.CityCode)
     );
@@ -19,14 +21,34 @@ const CityList = () => {
     try {
       const weatherResults = await Promise.all(dataPromises);
       setWeatherData(weatherResults);
-      console.log(weatherResults);
+      setFilteredData(weatherResults)
     } catch (error) {
       // Handle the error
     }
   }
+  const handleTextChange = (e)=>{
+    setInputValue(e.target.value)
+  }
   useEffect(() => {
     fetchWeatherData();
   }, []);
+
+  useEffect(() => {
+    // Copy the original weatherData array
+    let result = [...weatherData];
+    if (inputValue) {
+        // Filter the data based on whether the city name contains the input value
+        result = result.filter(city => {
+            const cityName = city.list[0].name.toLowerCase();
+            return cityName.includes(inputValue.toLowerCase());
+        });
+    }
+    // Update the state with the filtered data
+    setFilteredData(result);
+}, [inputValue]);
+
+
+
 
   const bgColors = ["#FF5733", "#33FF57", "#5733FF", "#FF33E8", "#33E8FF"];
 
@@ -50,9 +72,17 @@ const CityList = () => {
           </center>
         </b>
       </p>
+      <div style={{
+        display:"flex",
+        justifyContent:"center",
+        alignItems:"center",
+        marginTop:"50px"
+      }}>
+        <SearchBar value={inputValue} onChange={handleTextChange}/>
+        </div>
       <Container>
         <Row>
-          {weatherData.map((city, index) => (
+          {fileteredData.map((city, index) => (
             <Col lg={6} sm={12} key={index}>
               <Weather
                 city={city.list[0].name}
